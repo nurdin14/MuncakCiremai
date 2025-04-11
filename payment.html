@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Pemesanan Wisata</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#ff5722',
+            light: '#fff7f4',
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-light text-gray-800">
+    <a href="home.html" class="flex items-center text-sm text-gray-600 hover:text-orange-500 mb-4">
+        ← <span class="ml-1">Batal & Kembali ke Beranda</span>
+      </a>
+
+  <div class="max-w-6xl mx-auto p-6 my-10 bg-white rounded-2xl shadow-xl">
+    <h1 class="text-2xl md:text-3xl font-bold text-primary mb-8 text-center">Pemesanan Paket Wisata Gunung Ciremai</h1>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Form Pemesan -->
+      <form id="bookingForm" class="md:col-span-2 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="font-medium text-sm mb-1 block">Nama Pemesan</label>
+            <input type="text" class="w-full p-3 rounded-xl border focus:ring-2 focus:ring-primary" required>
+          </div>
+          <div>
+            <label class="font-medium text-sm mb-1 block">Email</label>
+            <input type="email" class="w-full p-3 rounded-xl border focus:ring-2 focus:ring-primary" required>
+          </div>
+          <div>
+            <label class="font-medium text-sm mb-1 block">No. Handphone</label>
+            <input type="tel" class="w-full p-3 rounded-xl border focus:ring-2 focus:ring-primary" required>
+          </div>
+          <div>
+            <label class="font-medium text-sm mb-1 block">Alamat</label>
+            <input type="text" class="w-full p-3 rounded-xl border focus:ring-2 focus:ring-primary" required>
+          </div>
+          <div>
+            <label class="font-medium text-sm mb-1 block">Tanggal Keberangkatan</label>
+            <input type="date" class="w-full p-3 rounded-xl border focus:ring-2 focus:ring-primary" required>
+          </div>
+          <div>
+            <label class="font-medium text-sm mb-1 block">Tanggal Pulang</label>
+            <input type="date" class="w-full p-3 rounded-xl border focus:ring-2 focus:ring-primary" required>
+          </div>
+          <div>
+            <label class="font-medium text-sm mb-1 block">Jumlah Peserta</label>
+            <input type="number" id="jumlahPeserta" value="1" min="1" class="w-full p-3 rounded-xl border focus:ring-2 focus:ring-primary" required>
+          </div>
+          <div>
+            <label class="block font-medium text-sm mb-1">Upload Bukti Transfer</label>
+            <input type="file" name="bukti_transfer" accept="image/*" required class="block w-full border rounded-xl p-2">
+          </div>
+        </div>
+      </form>
+
+      <!-- Ringkasan Pembayaran -->
+      <div class="space-y-4 bg-orange-50 p-6 rounded-xl border border-orange-200 h-fit">
+        <h2 class="text-xl font-semibold text-primary mb-4">Ringkasan Pembayaran</h2>
+
+        <div class="flex justify-between items-center text-base font-semibold">
+          <span>Total Pembayaran</span>
+          <span id="totalPembayaran" class="text-green-600">Rp500.000</span>
+        </div>
+
+        <div class="mt-4">
+          <label class="block font-medium text-sm mb-1">Metode Pembayaran</label>
+          <select id="metodePembayaran" class="w-full p-3 rounded-xl border focus:ring-2 focus:ring-primary" required>
+            <option value="">Pilih Metode</option>
+            <option value="bank">Transfer Bank (BCA)</option>
+            <option value="ewallet">E-Wallet (DANA)</option>
+          </select>
+        </div>
+
+        <div id="infoPembayaran" class="mt-4 p-4 rounded-xl bg-white border hidden">
+          <p id="infoText" class="text-sm text-gray-800"></p>
+        </div>
+
+        <button type="submit" form="bookingForm" class="w-full bg-primary hover:bg-orange-600 text-white py-3 rounded-xl font-semibold text-lg transition">
+          Konfirmasi & Bayar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const pesertaInput = document.getElementById('jumlahPeserta');
+    const totalPembayaran = document.getElementById('totalPembayaran');
+    const metodePembayaran = document.getElementById('metodePembayaran');
+    const infoPembayaran = document.getElementById('infoPembayaran');
+    const infoText = document.getElementById('infoText');
+
+    const hargaPerOrang = 500000;
+
+    function updateTotal() {
+      const jumlah = parseInt(pesertaInput.value) || 1;
+      const total = jumlah * hargaPerOrang;
+      totalPembayaran.textContent = `Rp${total.toLocaleString('id-ID')}`;
+    }
+
+    pesertaInput.addEventListener('input', updateTotal);
+
+    metodePembayaran.addEventListener('change', () => {
+      const metode = metodePembayaran.value;
+      if (metode === 'bank') {
+        infoText.textContent = 'Transfer ke rekening BCA: 1234567890 a.n. PT Wisata Ciremai';
+        infoPembayaran.classList.remove('hidden');
+      } else if (metode === 'ewallet') {
+        infoText.textContent = 'Kirim ke DANA: 08123456789 a.n. Wisata Ciremai';
+        infoPembayaran.classList.remove('hidden');
+      } else {
+        infoPembayaran.classList.add('hidden');
+      }
+    });
+
+    updateTotal();
+  </script>
+
+</body>
+</html>

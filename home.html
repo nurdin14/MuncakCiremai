@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muncak Gunung Ciremai</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @keyframes fadeInZoom {
+      0% { opacity: 0; transform: scale(1.1); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .animate-fade-in {
+      animation: fadeInZoom 1.5s ease-out both;
+    }
+    .dot {
+      height: 10px; width: 10px; margin: 0 4px;
+      background-color: #bbb;
+      border-radius: 50%; display: inline-block;
+      transition: background-color 0.3s;
+    }
+    .dot.active { background-color: #facc15; }
+    .slide { display: none; }
+    .overlay {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
+    }
+  </style>
+  <script>
+    let slideIndex = 0;
+    let slides, dots;
+    function showSlidesAuto() {
+      if (!slides) {
+        slides = document.getElementsByClassName("slide");
+        dots = document.getElementsByClassName("dot");
+      }
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        dots[i].classList.remove("active");
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1; }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].classList.add("active");
+      setTimeout(showSlidesAuto, 5000);
+    }
+
+    function plusSlides(n) {
+      showSlidesManual(slideIndex += n);
+    }
+
+    function showSlidesManual(n) {
+      slides = document.getElementsByClassName("slide");
+      dots = document.getElementsByClassName("dot");
+      if (n > slides.length) { slideIndex = 1; }
+      if (n < 1) { slideIndex = slides.length; }
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        dots[i].classList.remove("active");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].classList.add("active");
+    }
+
+    window.onload = () => {
+      showSlidesAuto();
+    };
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Navbar -->
+  <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-2xl font-bold text-yellow-600">MuncakCiremai</a>
+      <nav>
+        <ul class="hidden md:flex space-x-6 font-medium text-gray-700">
+          <li><a href="#tentang" class="hover:text-yellow-600 transition duration-300">Tentang</a></li>
+          <li><a href="#jalur" class="hover:text-yellow-600 transition duration-300">Jalur</a></li>
+          <li><a href="#galeri" class="hover:text-yellow-600 transition duration-300">Galeri</a></li>
+          <li><a href="#paket" class="hover:text-yellow-600 transition duration-300">Paket</a></li>
+          <li><a href="#kontak" class="hover:text-yellow-600 transition duration-300">Kontak</a></li>
+        </ul>
+        <button id="menu-toggle" class="md:hidden text-yellow-600 text-2xl focus:outline-none">
+          ☰
+        </button>
+      </nav>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-white px-6 pb-4">
+      <ul class="flex flex-col space-y-4 font-medium text-gray-700">
+        <li><a href="#tentang" class="hover:text-yellow-600">Tentang</a></li>
+        <li><a href="#jalur" class="hover:text-yellow-600">Jalur</a></li>
+        <li><a href="#galeri" class="hover:text-yellow-600">Galeri</a></li>
+        <li><a href="#paket" class="hover:text-yellow-600">Paket</a></li>
+        <li><a href="#kontak" class="hover:text-yellow-600">Kontak</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="pt-20"></div>
+
+  <!-- Hero Slider Section -->
+  <header class="relative h-screen overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="slide h-full w-full bg-cover bg-center animate-fade-in" style="background-image: url('img/1.jpg'); display: block;"></div>
+      <div class="slide h-full w-full bg-cover bg-center animate-fade-in" style="background-image: url('img/2.jpg');"></div>
+      <div class="slide h-full w-full bg-cover bg-center animate-fade-in" style="background-image: url('img/3.jpg');"></div>
+    </div>
+
+    <!-- Overlay + Content -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 drop-shadow-lg">Eksplorasi Keindahan Gunung Ciremai</h1>
+        <p class="text-lg md:text-xl font-light mb-6 max-w-2xl drop-shadow-sm">Nikmati pengalaman mendaki yang tak terlupakan di puncak tertinggi Jawa Barat.</p>
+        <a href="#paket" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300">
+        Lihat Paket Wisata
+        </a>
+    </div>
+
+    <!-- Tombol navigasi manual -->
+    <button onclick="plusSlides(-1)" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/40 text-white text-2xl px-3 py-1 rounded-full hover:bg-black/70">&#10094;</button>
+    <button onclick="plusSlides(1)" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/40 text-white text-2xl px-3 py-1 rounded-full hover:bg-black/70">&#10095;</button>
+
+    <!-- Dot indikator -->
+    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </header>
+
+
+  <!-- Tentang Gunung Ciremai -->
+  <section id="tentang" class="py-16 bg-gradient-to-b from-white to-yellow-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Tentang Gunung Ciremai</h2>
+        <div class="mx-auto w-24 h-1 bg-yellow-500 rounded"></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <img src="img/gc.jpg" alt="Gunung Ciremai" class="rounded-2xl shadow-lg">
+        </div>
+        <div>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Gunung Ciremai merupakan gunung tertinggi di Jawa Barat dengan ketinggian 3.078 mdpl. Terletak di perbatasan antara Kabupaten Kuningan dan Majalengka, gunung ini menjadi destinasi favorit para pendaki karena menawarkan pemandangan alam yang memukau dan udara yang sejuk. Jalur pendakian yang beragam memberikan pilihan menarik bagi para petualang, mulai dari jalur yang ramah pemula hingga yang menantang.
+          </p>
+          <p class="mt-4 text-lg text-gray-600 italic">"Menjelajahi Ciremai bukan sekadar pendakian, tapi perjalanan menyatu dengan alam."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jalur Pendakian -->
+  <section id="jalur" class="py-20 bg-gradient-to-b from-yellow-50 to-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center text-yellow-700 mb-12">Jalur Pendakian</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+  
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+          <img src="img/linggarjati.jpg" alt="Jalur Linggarjati" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-yellow-600 mb-2">Jalur Linggarjati</h3>
+            <p class="text-gray-600 mb-3">Jalur yang menantang dengan pemandangan memukau, cocok bagi pendaki berpengalaman.</p>
+            <span class="inline-block bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">Tingkat Sulit</span>
+          </div>
+        </div>
+  
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+          <img src="img/apuy.jpg" alt="Jalur Apuy" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-yellow-600 mb-2">Jalur Apuy</h3>
+            <p class="text-gray-600 mb-3">Lebih landai dan cocok bagi pemula dengan pemandangan hutan pinus yang indah.</p>
+            <span class="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Tingkat Mudah</span>
+          </div>
+        </div>
+  
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+          <img src="img/palutungan.jpg" alt="Jalur Palutungan" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-yellow-600 mb-2">Jalur Palutungan</h3>
+            <p class="text-gray-600 mb-3">Favorit banyak pendaki karena akses yang mudah dan fasilitas yang lengkap.</p>
+            <span class="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Tingkat Sedang</span>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+<section id="galeri" class="py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center text-yellow-700 mb-12">Galeri Gunung Ciremai</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="overflow-hidden rounded-2xl shadow-lg">
+          <img src="img/gunung 1.jpg" alt="Gunung Ciremai 1" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-2xl shadow-lg">
+          <img src="img/gunung 2.jpg" alt="Gunung Ciremai 2" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-2xl shadow-lg">
+          <img src="img/gunung 3.jpg" alt="Gunung Ciremai 3" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-2xl shadow-lg">
+          <img src="img/camping.png" alt="Camping Ciremai" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-2xl shadow-lg">
+          <img src="img/view_jalur.jpg" alt="Sunrise Ciremai" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-2xl shadow-lg">
+          <img src="img/Langit Biru.jpeg" alt="Puncak Ciremai" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paket Wisata -->
+  <section id="paket" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center text-yellow-700 mb-12">Paket Wisata</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+  
+        <div class="bg-yellow-50 rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
+          <div class="p-6 text-center">
+            <h3 class="text-2xl font-semibold text-yellow-700 mb-4">Paket Hemat</h3>
+            <p class="text-gray-600 mb-4">Cocok untuk pendaki solo atau backpacker. Termasuk tiket masuk & snack.</p>
+            <ul class="text-sm text-gray-700 mb-4">
+              <li>✅ Tiket Masuk</li>
+              <li>✅ Air Mineral & Snack</li>
+              <li>❌ Guide & Tenda</li>
+            </ul>
+            <div class="text-2xl font-bold text-yellow-700 mb-2">Rp150.000</div>
+            <!-- <button onclick="window.location.href='payment.html'" class="bg-yellow-500 text-white py-2 px-4 rounded-full hover:bg-yellow-600">Pilih Paket</button> -->
+          </div>
+        </div>
+  
+        <div class="bg-white border-4 border-yellow-500 rounded-2xl shadow-2xl overflow-hidden transform scale-105">
+          <div class="p-6 text-center">
+            <h3 class="text-2xl font-semibold text-yellow-700 mb-4">Paket Favorit</h3>
+            <p class="text-gray-600 mb-4">Paket lengkap dengan tenda dan guide profesional. Cocok untuk kelompok kecil.</p>
+            <ul class="text-sm text-gray-700 mb-4">
+              <li>✅ Tiket Masuk</li>
+              <li>✅ Tenda & Guide</li>
+              <li>✅ Snack & Air Mineral</li>
+            </ul>
+            <div class="text-2xl font-bold text-yellow-700 mb-2">Rp350.000</div>
+            <!-- <button onclick="window.location.href='payment.html'" class="bg-yellow-500 text-white py-2 px-4 rounded-full hover:bg-yellow-600">Pilih Paket</button> -->
+          </div>
+          <div class="absolute top-0 right-0 bg-yellow-500 text-white text-xs px-3 py-1 rounded-bl-xl font-semibold">Paling Populer</div>
+        </div>
+  
+        <div class="bg-yellow-50 rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
+          <div class="p-6 text-center">
+            <h3 class="text-2xl font-semibold text-yellow-700 mb-4">Paket Premium</h3>
+            <p class="text-gray-600 mb-4">Fasilitas lengkap: guide, tenda, makan 3x, dokumentasi, dan asuransi.</p>
+            <ul class="text-sm text-gray-700 mb-4">
+              <li>✅ Semua Fasilitas</li>
+              <li>✅ Dokumentasi & Makan 3x</li>
+              <li>✅ Asuransi</li>
+            </ul>
+            <div class="text-2xl font-bold text-yellow-700 mb-2">Rp750.000</div>
+            <!-- <button onclick="window.location.href='payment.html'" class="bg-yellow-500 text-white py-2 px-4 rounded-full hover:bg-yellow-600">Pilih Paket</button> -->
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+
+<!-- Kontak -->
+<section class="bg-gray-800 text-white py-16 px-6" id="kontak">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6 text-yellow-400">Hubungi Kami</h2>
+      <p class="mb-8 text-gray-300">Punya pertanyaan atau butuh bantuan untuk memilih paket? Hubungi kami melalui lewat WhatsApp!</p>
+      <div class="mt-10">
+        <a href="https://wa.me/6281234567890" target="_blank" class="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full text-lg transition">Chat via WhatsApp</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-8">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+      <p>&copy; 2025 MuncakCiremai. All rights reserved.</p>
+      <div class="flex space-x-4 mt-4 md:mt-0">
+        <a href="#" class="hover:text-white transition">Beranda</a>
+        <a href="#tentang" class="hover:text-white transition">Tentang</a>
+        <a href="#paket" class="hover:text-white transition">Paket</a>
+        <a href="#kontak" class="hover:text-white transition">Kontak</a>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    const toggleBtn = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+  
+    toggleBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
