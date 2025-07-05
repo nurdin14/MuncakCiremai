@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Base Camp Kang Yayan | XBANK ADVENTURE</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
       @keyframes fadeInZoom {
         0% {
@@ -284,7 +285,7 @@
     <section id="layanan" class="py-20 bg-gray-50">
       <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-4xl font-bold text-center text-yellow-700 mb-12">Layanan & Fasilitas Tambahan</h2>
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 gap-8">
           <!-- Kartu Penjemputan -->
           <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transform hover:-translate-y-2 transition">
             <div class="flex items-center justify-center mb-4">
@@ -327,16 +328,33 @@
             <p class="text-gray-600 mb-4">Bayar seikhlasnya. Gratis kopi.</p>
             <p class="text-sm text-gray-500 italic">Mohon jaga kebersihan sebelum meninggalkan tempat.</p>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Kartu Sewa Alat -->
-          <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transform hover:-translate-y-2 transition">
-            <div class="flex items-center justify-center mb-4">
-              <i class="fas fa-hiking text-3xl text-yellow-500"></i>
-            </div>
-            <h3 class="text-2xl font-semibold text-gray-800 mb-3 text-center">Sewa Alat Outdoor</h3>
-            <p class="text-gray-600 mb-4">Peralatan mendaki & camping lengkap.</p>
-            <a href="https://wa.me/6282126506684?text=Halo%20Kang%20Yayan%2C%20saya%20mau%20sewa%20alat%20outdoor" target="_blank" class="inline-block mt-2 text-yellow-600 font-medium hover:underline">Hubungi Basecamp</a>
-          </div>
+
+    <!-- Sewa Peralatan Outdoor -->
+    <section id="sewa-alat" class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-yellow-700 mb-12">Daftar Sewa Peralatan Outdoor</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white border border-gray-200 rounded-xl shadow-lg text-gray-700 text-sm md:text-base">
+            <thead class="bg-yellow-100 text-yellow-800">
+              <tr>
+                <th class="py-3 px-4 border-b text-left">Nama Peralatan</th>
+                <th class="py-3 px-4 border-b text-center">Harga Sewa</th>
+              </tr>
+            </thead>
+            <tbody id="tabel-alat-body">
+              <!-- Data dari JSON akan dimasukkan di sini -->
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center mt-10">
+          <a href="https://wa.me/6282126506684?text=Halo%20Kang%20Yayan%2C%20saya%20ingin%20sewa%20peralatan%20outdoor%20untuk%20pendakian" target="_blank"
+            class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition duration-300">
+            Sewa Sekarang via WhatsApp
+          </a>
         </div>
       </div>
     </section>
@@ -363,12 +381,22 @@
       <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
         <p>&copy; 2025 XBANK ADVENTURE. All rights reserved.</p>
         <div class="flex space-x-4 mt-4 md:mt-0">
-          <a href="#" class="hover:text-white transition">Beranda</a>
-          <a href="#tentang" class="hover:text-white transition">Tentang</a>
-          <a href="#galeri" class="hover:text-white transition">Galeri</a>
-          <a href="#paket" class="hover:text-white transition">Paket</a>
-          <a href="#layanan" class="hover:text-white transition">Layanan</a>
-          <a href="#kontak" class="hover:text-white transition">Kontak</a>
+          <a href="https://www.instagram.com/ciremai_via_apuy" target="_blank" class="hover:text-white transition">
+            <i class="text-yellow-400 fa-brands fa-instagram"></i> ciremai_via_apuy
+          </a>
+
+          <a href="https://www.facebook.com/xbankfaull.fauzi" target="_blank" class="hover:text-white transition">
+            <i class="text-yellow-400 fa-brands fa-facebook"></i> xbank faull fauzi
+          </a>
+
+          <a href="https://www.tiktok.com/@xbankadventure" target="_blank" class="hover:text-white transition">
+            <i class="text-yellow-400 fa-brands fa-tiktok"></i> xbankadventure
+          </a>
+
+          <a href="https://wa.me/6282126506684" target="_blank" class="hover:text-white transition">
+            <i class="text-yellow-400 fa-brands fa-whatsapp"></i> 082126506684
+          </a>
+
         </div>
       </div>
     </footer>
@@ -379,6 +407,115 @@
 
       toggleBtn.addEventListener("click", () => {
         mobileMenu.classList.toggle("hidden");
+      });
+
+      const alatOutdoor = [
+        {
+          nama: "Tenda Dobel Layer Kap 4/5",
+          harga: "Rp80.000",
+        },
+        {
+          nama: "Tenda Dobel Layer Kap 2/3",
+          harga: "Rp70.000",
+        },
+        {
+          nama: "Tenda Single Layer Kap 2/3",
+          harga: "Rp50.000",
+        },
+        {
+          nama: "Sleeping Bag",
+          harga: "Rp25.000",
+        },
+        {
+          nama: "Sleeping Pad",
+          harga: "Rp30.000",
+        },
+        {
+          nama: "Sepatu Gunung",
+          harga: "Rp50.000",
+        },
+        {
+          nama: "Jaket Gunung",
+          harga: "Rp40.000",
+        },
+        {
+          nama: "Celana Gunung",
+          harga: "Rp40.000",
+        },
+        {
+          nama: "Carier",
+          harga: "Rp50.000",
+        },
+        {
+          nama: "Tas Daypack",
+          harga: "Rp50.000",
+        },
+        {
+          nama: "Tas Hydropack",
+          harga: "Rp40.000",
+        },
+        {
+          nama: "Kompor Portable",
+          harga: "Rp25.000",
+        },
+        {
+          nama: "Nesting",
+          harga: "Rp25.000",
+        },
+        {
+          nama: "Flyseet",
+          harga: "Rp25.000",
+        },
+        {
+          nama: "Trekingpoll",
+          harga: "Rp15.000",
+        },
+        {
+          nama: "Kursi Portbale",
+          harga: "Rp30.000",
+        },
+        {
+          nama: "Meja Portbale",
+          harga: "Rp50.000",
+        },
+        {
+          nama: "Matras Alumnium Foil",
+          harga: "Rp15.000",
+        },
+        {
+          nama: "Matras",
+          harga: "Rp10.000",
+        },
+        {
+          nama: "Headlamp",
+          harga: "Rp15.000",
+        },
+        {
+          nama: "Lampu Tenda",
+          harga: "Rp15.000",
+        },
+        {
+          nama: "Raincover",
+          harga: "Rp15.000",
+        },
+        {
+          nama: "Gas Isi Ulang",
+          harga: "Rp15.000",
+        },
+      ];
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const tbody = document.getElementById("tabel-alat-body");
+        alatOutdoor.forEach(item => {
+          const row = document.createElement("tr");
+          row.className = "hover:bg-gray-50";
+
+          row.innerHTML = `
+            <td class="py-3 px-4 border-b">${item.nama}</td>
+            <td class="py-3 px-4 border-b text-center">${item.harga}</td>
+          `;
+          tbody.appendChild(row);
+        });
       });
     </script>
   </body>
